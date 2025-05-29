@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['jenis'])) {
         foreach ($list_hewan_id as $hewan_id) {
             $warga_id = $penerima['warga_id'];
             $kategori = $penerima['role'];
-            $jumlah_kg = number_format($jatah_peran, 2);
+            $jumlah_kg = round($jatah_peran, 2);
 
             mysqli_query($koneksi, "
                 INSERT INTO pembagian_daging (warga_id, hewan_id, kategori, jumlah_kg, tanggal)

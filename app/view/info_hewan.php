@@ -5,7 +5,6 @@ include '../koneksi/koneksi.php'; // pastikan file koneksi ini ada dan benar
 $query = "SELECT * FROM hewan_qurban ORDER BY created_at DESC";
 $result = $koneksi->query($query);
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +15,11 @@ $result = $koneksi->query($query);
             width: 80%;
             margin-top: 20px;
         }
-
         th, td {
             padding: 10px 15px;
             border: 1px solid #999;
             text-align: center;
         }
-
         th {
             background-color: #ddd;
         }

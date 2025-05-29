@@ -147,6 +147,7 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
 						['text' => 'Ambil Daging', 'page' => 'pembagian_daging.php'],
 						['text' => 'Kelola Warga', 'page' => 'kelola-warga.php'],
 						['text' => 'Data Hewan', 'page' => 'info_hewan.php'],
+						['text' => 'Input Hewan', 'page' => 'hewan_qurban.php'],
 						['text' => 'Distribusi', 'page' => 'info_pembagian.php'],
 						['text' => 'Keuangan', 'page' => 'info_keuangan.php'],
 					]
@@ -156,6 +157,8 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
 					'items' => [
 						['text' => 'Info Peran', 'page' => 'info_roles.php'],
 						['text' => 'Ambil Daging', 'page' => 'pembagian_daging.php'],
+						['text' => 'QR Code', 'page' => 'qr_warga.php?warga_id=' . $warga_id],
+
 					]
 				],
 				'panitia' => [
@@ -165,12 +168,17 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
 						['text' => 'Data Hewan', 'page' => 'info_hewan.php'],
 						['text' => 'Distribusi', 'page' => 'info_pembagian.php'],
 						['text' => 'Keuangan', 'page' => 'info_keuangan.php'],
+						['text' => 'QR Code', 'page' => 'qr_warga.php?warga_id=' . $warga_id],
+
+
 					]
 				],
 				'kurban' => [
 					'label' => 'Pekurban',
 					'items' => [
-						['text' => 'Hewan Saya', 'page' => 'view/info_hewan.php'],
+						['text' => 'Hewan Saya', 'page' => 'info_hewan.php'],
+						['text' => 'QR Code', 'page' => 'qr_warga.php?warga_id=' . $warga_id],
+
 					]
 				],
 			];
@@ -194,7 +202,7 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
 			?>
 		</div>
 
-		<a href="login.php" class="logout-btn">Logout</a>
+		<a href="logout.php" class="logout-btn">Logout</a>
 	</div>
 
 	<div class="content" id="main-content">

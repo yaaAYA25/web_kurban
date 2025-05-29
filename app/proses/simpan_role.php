@@ -38,4 +38,4 @@ foreach ($rolesData as $warga_id => $roles) {
     }
 }
 
-echo "✅ Role berhasil diperbarui. <a href='kelola_warga.php'>Kembali</a>";
+echo "✅ Role berhasil diperbarui. <a href='../view/dashboard.php'>Kembali</a>";
