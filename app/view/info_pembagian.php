@@ -47,57 +47,39 @@ while ($row = $result->fetch_assoc()) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8" />
-    <title>Rincian Pembagian Daging Lengkap</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
-        table { border-collapse: collapse; width: 100%; background-color: #fff; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
-        th { background-color: #f2f2f2; }
-        tfoot td { font-weight: bold; }
-    </style>
-</head>
-<body>
+<h2 style="font-family: Arial, sans-serif; margin-bottom: 20px;">Rincian Pembagian Daging Kurban</h2>
 
-<h2>Rincian Pembagian Daging Kurban</h2>
-
-<table>
+<table style="font-family: Arial, sans-serif; border-collapse: collapse; width: 100%; background-color: #fff;">
     <thead>
         <tr>
-            <th>Nama</th>
-            <th>Sapi (Warga)</th>
-            <th>Kambing (Warga)</th>
-            <th>Sapi (Panitia)</th>
-            <th>Kambing (Panitia)</th>
-            <th>Sapi (Kurban)</th>
-            <th>Kambing (Kurban)</th>
-            <th>Total (kg)</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Nama</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Sapi (Warga)</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Kambing (Warga)</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Sapi (Panitia)</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Kambing (Panitia)</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Sapi (Kurban)</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Kambing (Kurban)</th>
+            <th style="border: 1px solid #ddd; padding: 8px; background-color: #f2f2f2; text-align: left;">Total (kg)</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($data_warga as $id => $data): 
+        <?php foreach ($data_warga as $id => $data):
             $total = $data['warga_sapi'] + $data['warga_kambing']
-                   + $data['panitia_sapi'] + $data['panitia_kambing']
-                   + $data['kurban_sapi'] + $data['kurban_kambing'];
+                + $data['panitia_sapi'] + $data['panitia_kambing']
+                + $data['kurban_sapi'] + $data['kurban_kambing'];
         ?>
-        <tr>
-            <td><?= htmlspecialchars($data['nama']) ?></td>
-            <td><?= number_format($data['warga_sapi'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['warga_kambing'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['panitia_sapi'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['panitia_kambing'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['kurban_sapi'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['kurban_kambing'], 2, ',', '.') ?></td>
-            <td><strong><?= number_format($total, 2, ',', '.') ?></strong></td>
-        </tr>
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;"><?= htmlspecialchars($data['nama']) ?></td>
+                <td style="border: 1px solid #ddd; padding: 8px;"><?= number_format($data['warga_sapi'], 2, ',', '.') ?></td>
+                <td style="border: 1px solid #ddd; padding: 8px;"><?= number_format($data['warga_kambing'], 2, ',', '.') ?></td>
+                <td style="border: 1px solid #ddd; padding: 8px;"><?= number_format($data['panitia_sapi'], 2, ',', '.') ?></td>
+                <td style="border: 1px solid #ddd; padding: 8px;"><?= number_format($data['panitia_kambing'], 2, ',', '.') ?></td>
+                <td style="border: 1px solid #ddd; padding: 8px;"><?= number_format($data['kurban_sapi'], 2, ',', '.') ?></td>
+                <td style="border: 1px solid #ddd; padding: 8px;"><?= number_format($data['kurban_kambing'], 2, ',', '.') ?></td>
+                <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;"><?= number_format($total, 2, ',', '.') ?></td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
-
-</body>
-</html>
 
 <?php $koneksi->close(); ?>

@@ -1,32 +1,29 @@
-<?php 
+<?php
 session_start();
-
-if (!isset($_SESSION['id_user'])) {
-    header("Location: ../index.php");
-    exit();
-}
-
 $roles = $_SESSION['roles']; // Ini harus array, misal: ['panitia', 'warga']
 $username = $_SESSION['username'];
 
 // Fungsi bantu untuk cek apakah user punya role tertentu
 // Admin otomatis dianggap punya semua role
-function hasRole($roleName, $roles) {
+function hasRole($roleName, $roles)
+{
     return in_array('admin', $roles) || in_array($roleName, $roles);
 }
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Home</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <h2>Selamat datang, <?= htmlspecialchars($username) ?></h2>
-    
 
-  
+
+
     <?php if (hasRole('panitia', $roles)): ?>
         <h3>Dashboard Panitia</h3>
         <p>Ini halaman utama untuk Panitia.</p>
@@ -52,13 +49,14 @@ function hasRole($roleName, $roles) {
         <a href="lihat_qr">Lihat QR Warga</a>
     <?php endif; ?>
 </body>
+
 </html>
-  <?php if (hasRole('admin', $roles)): ?>
-        <h3>Dashboard Admin</h3>
-        <p>Ini halaman utama untuk Admin.</p>
-        <a href="kelola-warga.php">Kelola Warga</a>
-        <a href="./info_roles.php">Info Peserta dan Panitia</a>
-        <a href="./hewan_qurban.php">Input Data Hewan</a>
-        <a href="./pembagian_daging.php">Pembagian Daging</a>
-        <a href="./info_pembagian.php">Info Pembagian Daging</a>
-    <?php endif; ?>
+<?php if (hasRole('admin', $roles)): ?>
+    <h3>Dashboard Admin</h3>
+    <p>Ini halaman utama untuk Admin.</p>
+    <a href="kelola-warga.php">Kelola Warga</a>
+    <a href="./info_roles.php">Info Peserta dan Panitia</a>
+    <a href="./hewan_qurban.php">Input Data Hewan</a>
+    <a href="./pembagian_daging.php">Pembagian Daging</a>
+    <a href="./info_pembagian.php">Info Pembagian Daging</a>
+<?php endif; ?>

@@ -29,9 +29,8 @@ if (mysqli_num_rows($query) == 1) {
         $_SESSION['roles'] = $roles;
 
         // Setelah login, langsung redirect ke home.php
-        header("Location: ../view/home.php");
+        header("Location: ../view/dashboard.php");
         exit();
-
     } else {
         die("Password salah. <a href='javascript:history.back()'>Kembali</a>");
     }

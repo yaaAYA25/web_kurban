@@ -25,51 +25,42 @@ $sql_kurban = "
 $result_kurban = $koneksi->query($sql_kurban);
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Daftar Panitia dan Kurban</title>
-    <style>
-        body { font-family: Arial; padding: 20px; background: #f4f4f4; }
-        table { border-collapse: collapse; width: 45%; background: white; margin-bottom: 30px; float: left; margin-right: 5%; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #eee; }
-        h2 { clear: both; }
-    </style>
-</head>
-<body>
-
 <h2>Daftar Panitia</h2>
 <?php if ($result_panitia->num_rows === 0): ?>
     <p>Tidak ada panitia terdaftar.</p>
 <?php else: ?>
-<table>
-    <thead>
-        <tr><th>Nama Panitia</th></tr>
-    </thead>
-    <tbody>
-        <?php while ($row = $result_panitia->fetch_assoc()): ?>
-        <tr><td><?= htmlspecialchars($row['nama']) ?></td></tr>
-        <?php endwhile; ?>
-    </tbody>
-</table>
+    <table style="border-collapse: collapse; width: 100%; background: white; margin-bottom: 30px;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid #ccc; padding: 8px; text-align: left; background-color: #eee;">Nama Panitia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = $result_panitia->fetch_assoc()): ?>
+                <tr>
+                    <td style="border: 1px solid #ccc; padding: 8px;"><?= htmlspecialchars($row['nama']) ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
 <?php endif; ?>
 
 <h2>Daftar Kurban</h2>
 <?php if ($result_kurban->num_rows === 0): ?>
     <p>Tidak ada warga yang kurban terdaftar.</p>
 <?php else: ?>
-<table>
-    <thead>
-        <tr><th>Nama Kurban</th></tr>
-    </thead>
-    <tbody>
-        <?php while ($row = $result_kurban->fetch_assoc()): ?>
-        <tr><td><?= htmlspecialchars($row['nama']) ?></td></tr>
-        <?php endwhile; ?>
-    </tbody>
-</table>
+    <table style="border-collapse: collapse; width: 100%; background: white; margin-bottom: 30px;">
+        <thead>
+            <tr>
+                <th style="border: 1px solid #ccc; padding: 8px; text-align: left; background-color: #eee;">Nama Kurban</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = $result_kurban->fetch_assoc()): ?>
+                <tr>
+                    <td style="border: 1px solid #ccc; padding: 8px;"><?= htmlspecialchars($row['nama']) ?></td>
+                </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
 <?php endif; ?>
-
-</body>
-</html>
