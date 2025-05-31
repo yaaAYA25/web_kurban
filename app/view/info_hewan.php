@@ -19,26 +19,20 @@ $result = $koneksi->query($query);
             --white: #ffffff;
             --shadow: rgba(0, 0, 0, 0.05);
         }
-
         * {
             box-sizing: border-box;
-            /* font-family: 'Inter', sans-serif; */
         }
 
         body {
-            /* margin: 0;
-            padding: 40px; */
             background-color: var(--bg);
             color: var(--text);
         }
-
         h2 {
             text-align: center;
             margin-bottom: 30px;
             font-weight: 600;
             color: var(--text);
         }
-
         table {
             width: 95%;
             margin: auto;
@@ -147,7 +141,6 @@ $result = $koneksi->query($query);
             table, th, td {
                 font-size: 12px;
             }
-
             h2 {
                 font-size: 20px;
             }
@@ -155,7 +148,6 @@ $result = $koneksi->query($query);
     </style>
 </head>
 <body>
-
 <h2>Informasi Hewan Qurban</h2>
 
 <table>
@@ -185,7 +177,6 @@ $result = $koneksi->query($query);
             echo "<td>Rp " . number_format($row['biaya_total'], 2, ',', '.') . "</td>";
             echo "<td>" . date('d-m-Y H:i', strtotime($row['created_at'])) . "</td>";
             echo "</tr>";
-
             $total_jumlah += $row['jumlah'];
             $total_berat += $row['total_berat'];
             $total_biaya += $row['biaya_total'];
@@ -213,7 +204,6 @@ $result = $koneksi->query($query);
     “Sesungguhnya kami telah memberikan kepadamu nikmat yang banyak, maka dirikanlah salat karena Tuhanmu dan berqurbanlah.”<br>
     <em>– QS. Al-Kautsar: 1-2</em>
 </p>
-
 <div class="info-card">
     <div class="info-card-icon">📘</div>
     <div class="info-card-content">

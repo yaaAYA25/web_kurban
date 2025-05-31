@@ -17,15 +17,13 @@ ORDER BY w.nama
 ";
 
 $result = $koneksi->query($sql);
-
-// Susun data per warga
 $data_warga = [];
 
 while ($row = $result->fetch_assoc()) {
     $id = $row['warga_id'];
     $nama = $row['nama'];
-    $kategori = strtolower($row['kategori']); // warga, panitia, kurban
-    $jenis = strtolower($row['jenis']);       // sapi, kambing
+    $kategori = strtolower($row['kategori']); 
+    $jenis = strtolower($row['jenis']); 
     $berat = floatval($row['total_kg']);
 
     if (!isset($data_warga[$id])) {

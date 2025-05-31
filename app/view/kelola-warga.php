@@ -1,17 +1,11 @@
 <?php
 session_start();
 include "./../koneksi/koneksi.php";
-
-// Cek role admin
 if (!in_array('admin', $_SESSION['roles'])) {
     die("Akses ditolak. Halaman ini hanya untuk Admin.");
 }
-
-// Ambil semua warga
 $sql = "SELECT * FROM warga";
 $query = $koneksi->query($sql);
-
-// Hitung jumlah panitia dan kurban saat ini
 $panitiaCount = $koneksi->query("SELECT COUNT(*) as total FROM user_roles WHERE role='panitia'")->fetch_assoc()['total'];
 $kurbanCount = $koneksi->query("SELECT COUNT(*) as total FROM user_roles WHERE role='kurban'")->fetch_assoc()['total'];
 ?>
@@ -30,7 +24,6 @@ $kurbanCount = $koneksi->query("SELECT COUNT(*) as total FROM user_roles WHERE r
         </tr>
         <?php while ($row = $query->fetch_assoc()) {
             $user_id = $row['id_warga'];
-            // Ambil role aktif user ini
             $roles = [];
             $resRole = $koneksi->query("SELECT role FROM user_roles WHERE user_id IN (SELECT id_user FROM users WHERE warga_id=$user_id)");
             while ($r = $resRole->fetch_assoc()) {
@@ -41,7 +34,6 @@ $kurbanCount = $koneksi->query("SELECT COUNT(*) as total FROM user_roles WHERE r
             <td><?= $row['nama'] ?></td>
             <td>
                 <?php
-                // ambil username dari tabel users
                 $getUsername = $koneksi->query("SELECT username, id_user FROM users WHERE warga_id=$user_id")->fetch_assoc();
                 echo $getUsername ? $getUsername['username'] : "<i>Belum dibuat</i>";
                 ?>

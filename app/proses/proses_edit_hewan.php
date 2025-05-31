@@ -7,8 +7,6 @@ if (isset($_POST['update'])) {
     $jumlah = $_POST['jumlah'];
     $total_berat = $_POST['total_berat'];
     $biaya_total = $_POST['biaya_total'];
-
-    // Update data hewan
     $query = "UPDATE hewan_qurban SET 
                 jenis = '$jenis', 
                 jumlah = $jumlah, 
@@ -17,17 +15,12 @@ if (isset($_POST['update'])) {
               WHERE id = $id";
 
     if ($koneksi->query($query)) {
-        // Setelah update hewan, update data pembagian_daging
-        // Hitung total penerima yang punya hewan ini
         $cek_penerima = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM pembagian_daging WHERE hewan_id = $id");
         $data_penerima = mysqli_fetch_assoc($cek_penerima);
         $total_penerima = $data_penerima['total'];
 
         if ($total_penerima > 0) {
-            // Hitung jatah per orang
             $jatah_per_orang = round($total_berat / $total_penerima, 2);
-
-            // Update jumlah_kg di pembagian_daging
             $update_pembagian = mysqli_query($koneksi, "
                 UPDATE pembagian_daging
                 SET jumlah_kg = $jatah_per_orang

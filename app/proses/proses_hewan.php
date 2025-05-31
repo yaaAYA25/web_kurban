@@ -6,21 +6,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $jumlah = $_POST['jumlah'];
     $total_berat = $_POST['total_berat'];
     $biaya_total = $_POST['biaya_total'];
-
-    // Simpan ke tabel hewan_qurban
     $query = "INSERT INTO hewan_qurban (jenis, jumlah, total_berat, biaya_total)
               VALUES (?, ?, ?, ?)";
     $stmt = $koneksi->prepare($query);
     $stmt->bind_param("siid", $jenis, $jumlah, $total_berat, $biaya_total);
 
     if ($stmt->execute()) {
-        // Ambil tanggal hari ini
         $tanggal = date('Y-m-d');
         $sumber = 'Pembelian hewan qurban';
         $keterangan = "Pembelian $jumlah ekor $jenis";
         $jenis_keuangan = 'keluar';
-
-        // Masukkan juga ke tabel keuangan
         $query_keuangan = "INSERT INTO keuangan (tanggal, jenis, sumber, jumlah, keterangan)
                            VALUES (?, ?, ?, ?, ?)";
         $stmt_keuangan = $koneksi->prepare($query_keuangan);

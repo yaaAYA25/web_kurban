@@ -1,7 +1,5 @@
 <?php
 include "./../koneksi/koneksi.php";
-
-// Ambil semua data keuangan dari database
 $sql = "SELECT tanggal, jenis, sumber, jumlah, keterangan, total_keuangan FROM keuangan ORDER BY tanggal ASC";
 $result = $koneksi->query($sql);
 ?>

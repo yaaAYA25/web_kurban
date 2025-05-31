@@ -1,11 +1,8 @@
 <?php
-// session_start dan koneksi sudah ada seperti kode kamu
-
 session_start();
 require_once "../koneksi/koneksi.php";
 
 $role = isset($role) ? $role : 'warga';
-
 $warga_id = isset($_GET['warga_id']) ? intval($_GET['warga_id']) : 0;
 
 if ($warga_id <= 0) {
@@ -46,7 +43,6 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
 ?>
 
 <style>
-    /* Container utama 2 kolom */
     .container {
         display: flex;
         gap: 32px;
@@ -56,9 +52,8 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #333;
     }
-    /* Kolom kiri: QR Card */
     .qr-card {
-        flex: 0 0 350px; /* fix width */
+        flex: 0 0 350px; 
         background: #ffffff;
         padding: 28px 32px;
         border-radius: 14px;
@@ -117,8 +112,6 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         background-color: #095f71;
         box-shadow: 0 7px 22px rgba(9,95,113,0.65);
     }
-
-    /* Tambahan teks kecil di bawah tombol */
     .qr-info-small {
         display: block;
         margin-top: 14px;
@@ -128,8 +121,6 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         font-style: italic;
         user-select: none;
     }
-
-    /* Kolom kanan: Info dan Testimoni */
     .right-column {
         flex: 1;
         display: flex;
@@ -231,8 +222,6 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         text-align: right;
         color: #0c7b9b;
     }
-
-    /* Footer kecil */
     .qr-footer {
         margin: 50px auto 20px auto;
         font-size: 14px;
@@ -252,8 +241,6 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         text-decoration: underline;
         color: #095f71;
     }
-
-    /* Responsive */
     @media (max-width: 880px) {
         .container {
             flex-direction: column;

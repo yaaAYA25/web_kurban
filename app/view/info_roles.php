@@ -2,7 +2,6 @@
 session_start();
 include "./../koneksi/koneksi.php";
 
-// Ambil panitia
 $sql_panitia = "
     SELECT w.nama
     FROM user_roles ur
@@ -12,8 +11,6 @@ $sql_panitia = "
     ORDER BY w.nama ASC
 ";
 $result_panitia = $koneksi->query($sql_panitia);
-
-// Ambil kurban
 $sql_kurban = "
     SELECT w.nama
     FROM user_roles ur
@@ -23,22 +20,14 @@ $sql_kurban = "
     ORDER BY w.nama ASC
 ";
 $result_kurban = $koneksi->query($sql_kurban);
-
-// Ambil total warga (contoh)
 $sql_total_warga = "SELECT COUNT(*) as total FROM warga";
 $result_total_warga = $koneksi->query($sql_total_warga);
 $total_warga = $result_total_warga->fetch_assoc()['total'] ?? 0;
-
-// Hitung total panitia dan kurban dari data query sebelumnya
 $total_panitia = $result_panitia->num_rows;
 $total_kurban = $result_kurban->num_rows;
-
-// Data dummy total hewan qurban dan distribusi
-$total_hewan_qurban = 2;  // misal data statis atau bisa dari DB
-$daging_terdistribusi = 85; // persen distribusi daging (dummy)
+$total_hewan_qurban = 2;  
+$daging_terdistribusi = 85;
 $daging_belum = 100 - $daging_terdistribusi;
-
-// Simpan nama panitia dan kurban untuk chart
 $nama_panitia = [];
 if ($result_panitia->num_rows > 0) {
     $result_panitia->data_seek(0);
@@ -56,7 +45,6 @@ if ($result_kurban->num_rows > 0) {
 }
 ?>
 
-<!-- Chart.js & FontAwesome -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
@@ -193,8 +181,6 @@ if ($result_kurban->num_rows > 0) {
         max-height: 20px;
         margin-top: 20px;
     }
-
-    /* Sisi kanan panel untuk donut chart distribusi */
     .distribution-panel {
         flex: 1 1 280px;
         background: #fff;
@@ -364,14 +350,11 @@ if ($result_kurban->num_rows > 0) {
                 </div>
                 <button class="toggle-button-role" data-target="kurban-hidden">More</button>
             <?php endif; ?>
-
-            <!-- Grafik Kurban -->
             <canvas id="chartKurban"></canvas>
         </div>
 
     </div>
-
-    <!-- Panel Distribusi Daging -->
+    
     <div class="distribution-panel">
         <h2>Distribusi Daging</h2>
         <canvas id="chartDistribusi" width="200" height="200"></canvas>
@@ -380,7 +363,6 @@ if ($result_kurban->num_rows > 0) {
 </div>
 
 <script>
-    // Toggle "More" button
     document.querySelectorAll('.toggle-button-role').forEach(button => {
         button.addEventListener('click', () => {
             const targetId = button.getAttribute('data-target');
@@ -390,12 +372,8 @@ if ($result_kurban->num_rows > 0) {
             button.textContent = isActive ? 'Less' : 'More';
         });
     });
-
-    // Data panitia untuk chart (nama dan jumlah panitia)
     const panitiaLabels = <?= json_encode($nama_panitia) ?>;
     const kurbanLabels = <?= json_encode($nama_kurban) ?>;
-
-    // Chart Panitia - jumlah nama per panitia (disederhanakan)
     const ctxPanitia = document.getElementById('chartPanitia').getContext('2d');
     new Chart(ctxPanitia, {
         type: 'bar',
@@ -420,8 +398,6 @@ if ($result_kurban->num_rows > 0) {
             maintainAspectRatio: false
         }
     });
-
-    // Chart Kurban - jumlah nama per kurban (disederhanakan)
     const ctxKurban = document.getElementById('chartKurban').getContext('2d');
     new Chart(ctxKurban, {
         type: 'bar',
@@ -446,8 +422,6 @@ if ($result_kurban->num_rows > 0) {
             maintainAspectRatio: false
         }
     });
-
-    // Chart Distribusi Daging (donut)
     const ctxDistribusi = document.getElementById('chartDistribusi').getContext('2d');
     new Chart(ctxDistribusi, {
         type: 'doughnut',
