@@ -120,7 +120,7 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
 		}
 
 		.logout-btn {
-			background-color: #3b82f6;
+			background-color: #1a9cb8;
 			color: white;
 			padding: 12px;
 			text-align: center;
@@ -133,7 +133,7 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
 		}
 
 		.logout-btn:hover {
-			background-color: #2563eb;
+			background-color: #10778a;
 		}
 
 		.content {
