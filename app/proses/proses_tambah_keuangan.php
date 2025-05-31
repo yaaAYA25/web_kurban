@@ -5,7 +5,7 @@ ini_set('display_errors', 1);
 
 include "../koneksi/koneksi.php";
 
-if (!in_array('admin', $_SESSION['roles'])) {
+if (!array_intersect(['admin', 'panitia'], $_SESSION['roles'])) {
     die("Anda tidak punya akses.");
 }
 
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header("Location: ../view/tambah_keuangan.php");
         exit();
     } else {
-        header("Location: ../view/tambah_keuangan.php");
+        header("Location: ../view/dashboard.php");
         $_SESSION['success'] = "Data keuangan berhasil ditambahkan.";
         exit();
     }
