@@ -16,7 +16,7 @@ if ($warga_id <= 0) {
 }
 
 $sqlWarga = "SELECT nama, nik FROM warga WHERE id_warga = ?";
-$stmtWarga = mysqli_prepare($koneksi, $sqlWarga);
+$stmtWarga = mysqli_prepare($koneksi, $sqlWarga); 
 mysqli_stmt_bind_param($stmtWarga, "i", $warga_id);
 mysqli_stmt_execute($stmtWarga);
 $resultWarga = mysqli_stmt_get_result($stmtWarga);
@@ -301,5 +301,5 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
 </div>
 
 <div class="qr-footer">
-    &copy; 2025 Sistem Qurban RT 001. Developed by <a href="#" target="_blank" rel="noopener noreferrer">Your Name</a>.
+    &copy; 2025 Sistem Qurban RT 001. Developed by <a href="#" target="_blank" rel="noopener noreferrer">Sulton & Hidayah</a>.
 </div>
