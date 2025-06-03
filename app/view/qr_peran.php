@@ -16,7 +16,7 @@ if ($warga_id <= 0) {
 }
 
 $sqlWarga = "SELECT nama, nik FROM warga WHERE id_warga = ?";
-$stmtWarga = mysqli_prepare($koneksi, $sqlWarga); 
+$stmtWarga = mysqli_prepare($koneksi, $sqlWarga);
 mysqli_stmt_bind_param($stmtWarga, "i", $warga_id);
 mysqli_stmt_execute($stmtWarga);
 $resultWarga = mysqli_stmt_get_result($stmtWarga);
@@ -52,22 +52,25 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         color: #333;
     }
+
     .qr-card {
-        flex: 0 0 350px; 
+        flex: 0 0 350px;
         background: #ffffff;
         padding: 28px 32px;
         border-radius: 14px;
-        box-shadow: 0 4px 16px rgba(26,156,184,0.15);
+        box-shadow: 0 4px 16px rgba(26, 156, 184, 0.15);
         color: #222;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
+
     .qr-card:hover {
         transform: translateY(-6px);
-        box-shadow: 0 10px 30px rgba(26,156,184,0.3);
+        box-shadow: 0 10px 30px rgba(26, 156, 184, 0.3);
     }
+
     .qr-card h2 {
         font-size: 22px;
         color: #0c7b9b;
@@ -76,6 +79,7 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         letter-spacing: 0.04em;
         text-align: center;
     }
+
     .qr-card p {
         font-size: 16px;
         margin: 8px 0;
@@ -83,14 +87,16 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         width: 100%;
         text-align: center;
     }
+
     .qr-card img {
         margin-top: 24px;
         width: 220px;
         height: 220px;
         border-radius: 14px;
-        box-shadow: 0 6px 16px rgba(26,156,184,0.3);
+        box-shadow: 0 6px 16px rgba(26, 156, 184, 0.3);
         object-fit: cover;
     }
+
     .qr-download-btn {
         margin-top: 26px;
         padding: 12px 26px;
@@ -102,16 +108,18 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         font-weight: 700;
         text-decoration: none;
         cursor: pointer;
-        box-shadow: 0 5px 14px rgba(12,123,155,0.45);
+        box-shadow: 0 5px 14px rgba(12, 123, 155, 0.45);
         transition: background 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
         width: 100%;
         text-align: center;
         display: inline-block;
     }
+
     .qr-download-btn:hover {
         background-color: #095f71;
-        box-shadow: 0 7px 22px rgba(9,95,113,0.65);
+        box-shadow: 0 7px 22px rgba(9, 95, 113, 0.65);
     }
+
     .qr-info-small {
         display: block;
         margin-top: 14px;
@@ -121,6 +129,7 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         font-style: italic;
         user-select: none;
     }
+
     .right-column {
         flex: 1;
         display: flex;
@@ -128,10 +137,11 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         gap: 28px;
         max-width: 520px;
     }
+
     .info-card {
         background: #e6f4fa;
         border-radius: 14px;
-        box-shadow: 0 2px 12px rgba(26,156,184,0.12);
+        box-shadow: 0 2px 12px rgba(26, 156, 184, 0.12);
         padding: 28px 32px;
         font-size: 16px;
         color: #0c7b9b;
@@ -141,30 +151,36 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         flex-direction: column;
         gap: 24px;
     }
+
     .info-card h3 {
         margin: 0 0 14px 0;
         font-weight: 800;
         font-size: 20px;
         letter-spacing: 0.03em;
     }
+
     .info-card ul {
         list-style-type: disc;
         padding-left: 22px;
         margin: 0;
         color: #0a6681;
     }
+
     .info-card ul li {
         margin-bottom: 10px;
     }
+
     .bar-chart {
         width: 100%;
     }
+
     .bar-label {
         font-size: 14px;
         font-weight: 700;
         color: #0a6681;
         margin-bottom: 8px;
     }
+
     .bar {
         height: 20px;
         border-radius: 10px;
@@ -173,6 +189,7 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         position: relative;
         overflow: hidden;
     }
+
     .bar-inner {
         height: 100%;
         background-color: #0c7b9b;
@@ -183,9 +200,10 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         font-size: 13px;
         font-weight: 700;
         line-height: 20px;
-        box-shadow: inset 0 -2px 8px rgba(0,0,0,0.15);
+        box-shadow: inset 0 -2px 8px rgba(0, 0, 0, 0.15);
         transition: width 0.4s ease;
     }
+
     .quote {
         font-style: italic;
         font-size: 15px;
@@ -201,7 +219,7 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
     .testimonial-card {
         background: #ffffff;
         border-radius: 14px;
-        box-shadow: 0 4px 14px rgba(12,123,155,0.1);
+        box-shadow: 0 4px 14px rgba(12, 123, 155, 0.1);
         padding: 24px 28px;
         font-size: 15px;
         color: #1a3d57;
@@ -211,17 +229,20 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         flex-direction: column;
         gap: 14px;
     }
+
     .testimonial-card p {
         margin: 0;
         font-style: italic;
         color: #2e5c7d;
     }
+
     .testimonial-author {
         font-weight: 700;
         font-size: 14px;
         text-align: right;
         color: #0c7b9b;
     }
+
     .qr-footer {
         margin: 50px auto 20px auto;
         font-size: 14px;
@@ -231,16 +252,19 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
         user-select: none;
         max-width: 900px;
     }
+
     .qr-footer a {
         color: #0c7b9b;
         text-decoration: none;
         font-weight: 700;
         transition: color 0.2s ease-in-out;
     }
+
     .qr-footer a:hover {
         text-decoration: underline;
         color: #095f71;
     }
+
     @media (max-width: 880px) {
         .container {
             flex-direction: column;
@@ -248,15 +272,18 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
             padding: 0 15px;
             gap: 24px;
         }
+
         .qr-card {
             flex: none;
             max-width: 100%;
             width: 320px;
             margin: 0 auto;
         }
+
         .right-column {
             max-width: 100%;
         }
+
         .qr-card img {
             width: 180px;
             height: 180px;
@@ -266,7 +293,7 @@ $qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" . urle
 
 <div class="container">
     <div class="qr-card">
-        <h2>QR Code untuk <?= htmlspecialchars($dataWarga['nama']) ?> (<?= htmlspecialchars($role) ?>)</h2>
+        <h2>QR Code untuk <br> <?= htmlspecialchars($dataWarga['nama']) ?> (<?= htmlspecialchars($role) ?>)</h2>
         <p><strong>NIK:</strong> <?= htmlspecialchars($dataWarga['nik']) ?></p>
         <p><strong>Daging (kg):</strong> <?= htmlspecialchars($total_kg) ?></p>
         <img src="<?= $qrUrl ?>" alt="QR Code <?= htmlspecialchars($role) ?>">
