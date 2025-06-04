@@ -91,12 +91,12 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
                     'label' => 'Admin',
                     'items' => [
                         ['text' => 'Info Panitia dan Peserta', 'page' => 'info_roles.php'],
-                        ['text' => 'Pembagian Daging', 'page' => 'pembagian_daging.php'],
+                        // ['text' => 'Pembagian Daging', 'page' => 'pembagian_daging.php'],
                         ['text' => 'Data Warga', 'page' => 'kelola-warga.php'],
                         ['text' => 'Data Hewan', 'page' => 'info_hewan_edit.php'],
-                        ['text' => 'Input Hewan', 'page' => 'hewan_qurban.php'],
+                        // ['text' => 'Input Hewan', 'page' => 'hewan_qurban.php'],
                         ['text' => 'Info Pembagian', 'page' => 'info_pembagian.php'],
-                        ['text' => 'Input Keuangan', 'page' => 'tambah_keuangan.php'],
+                        // ['text' => 'Input Keuangan', 'page' => 'tambah_keuangan.php'],
                         ['text' => 'Info Keuangan', 'page' => 'info_keuangan.php'],
                     ]
                 ],
