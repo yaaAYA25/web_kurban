@@ -31,7 +31,6 @@ $saldo = $masuk - $keluar;
     <title>Informasi Keuangan Kurban</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
 <body class="bg-cyan-50 text-gray-800">
 
@@ -64,28 +63,28 @@ $saldo = $masuk - $keluar;
 
     <!-- Tabel -->
     <div class="overflow-x-auto bg-white rounded-xl shadow-md">
-        <table class="min-w-full divide-y divide-gray-200">
+        <table class="min-w-full divide-y divide-gray-200 text-sm">
             <thead class="bg-cyan-600 text-white">
                 <tr>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Tanggal</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Jenis</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Sumber</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Jumlah</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Keterangan</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Total Keuangan</th>
+                    <th class="px-2 py-3 text-left font-semibold">Tanggal</th>
+                    <th class="px-2 py-3 text-left font-semibold">Jenis</th>
+                    <th class="px-4 py-3 text-left font-semibold">Sumber</th>
+                    <th class="px-4 py-3 text-left font-semibold">Jumlah</th>
+                    <th class="px-5 py-3 text-left font-semibold">Keterangan</th>
+                    <th class="px-4 py-3 text-left font-semibold">Total Keuangan</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
                 <?php while ($row = $result->fetch_assoc()): ?>
                     <tr class="hover:bg-cyan-50">
-                        <td class="px-6 py-4"><?= htmlspecialchars($row['tanggal']) ?></td>
-                        <td class="px-6 py-4" style="color: <?= $row['jenis'] == 'masuk' ? 'green' : 'red' ?>">
+                        <td class="px-2 py-3"><?= htmlspecialchars($row['tanggal']) ?></td>
+                        <td class="px-2 py-3" style="color: <?= $row['jenis'] == 'masuk' ? 'green' : 'red' ?>">
                             <?= ucfirst($row['jenis']) ?>
                         </td>
-                        <td class="px-6 py-4"><?= htmlspecialchars($row['sumber']) ?></td>
-                        <td class="px-6 py-4">Rp <?= number_format($row['jumlah'], 2, ',', '.') ?></td>
-                        <td class="px-6 py-4"><?= htmlspecialchars($row['keterangan']) ?></td>
-                        <td class="px-6 py-4 font-bold">Rp <?= number_format($row['total_keuangan'], 2, ',', '.') ?></td>
+                        <td class="px-4 py-3"><?= htmlspecialchars($row['sumber']) ?></td>
+                        <td class="px-4 py-3">Rp <?= number_format($row['jumlah'], 2, ',', '.') ?></td>
+                        <td class="px-5 py-3"><?= htmlspecialchars($row['keterangan']) ?></td>
+                        <td class="px-4 py-3 font-bold">Rp <?= number_format($row['total_keuangan'], 2, ',', '.') ?></td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
@@ -94,7 +93,6 @@ $saldo = $masuk - $keluar;
 </div>
 
 <!-- Modal Input Keuangan -->
-<!-- Modal Keuangan Ringkas & Elegan -->
 <div id="modalKeuangan" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/40 backdrop-blur-sm">
   <div class="bg-white w-[95%] max-w-sm mx-auto rounded-xl shadow-xl p-5 relative animate__animated animate__fadeInUp">
 

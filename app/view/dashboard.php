@@ -39,12 +39,11 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
         .fade-in.show {
             opacity: 1;
         }
-        /* Loading Screen */
         #loading-logo {
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background-color: #22d3ee; /* Tailwind cyan-400 */
+            background-color: #22d3ee;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -66,7 +65,6 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
     <!-- Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center" style="background-color:#f5f7fa;">
         <div id="loading-logo" aria-label="Logo Qurban" role="img" title="Logo Qurban">
-            <!-- Simple cow SVG icon as Qurban logo -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="70" height="70" aria-hidden="true" focusable="false" fill="white">
                 <path d="M32 2C19 2 10 12 10 24c0 12 10 28 22 28s22-16 22-28c0-12-9-22-22-22zm0 48c-11 0-19-15-19-26 0-9 7-18 19-18s19 9 19 18c0 11-8 26-19 26z"/>
                 <circle cx="22" cy="26" r="4" />
@@ -91,12 +89,9 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
                     'label' => 'Admin',
                     'items' => [
                         ['text' => 'Info Panitia dan Peserta', 'page' => 'info_roles.php'],
-                        // ['text' => 'Pembagian Daging', 'page' => 'pembagian_daging.php'],
                         ['text' => 'Data Warga', 'page' => 'kelola-warga.php'],
                         ['text' => 'Data Hewan', 'page' => 'info_hewan_edit.php'],
-                        // ['text' => 'Input Hewan', 'page' => 'hewan_qurban.php'],
                         ['text' => 'Info Pembagian', 'page' => 'info_pembagian.php'],
-                        // ['text' => 'Input Keuangan', 'page' => 'tambah_keuangan.php'],
                         ['text' => 'Info Keuangan', 'page' => 'info_keuangan.php'],
                     ]
                 ],
@@ -159,12 +154,12 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
 
     <script>
         $(document).ready(function () {
-            // Tampilkan loading 3 detik
+            // Loading hanya 0.5 detik
             setTimeout(function () {
-                $('#loading-screen').fadeOut(500, function () {
+                $('#loading-screen').fadeOut(300, function () {
                     $('#sidebar, #main-content').addClass('show');
                 });
-            }, 3000);
+            }, 500);
 
             // Toggle submenu
             $('.toggle-submenu').click(function () {
