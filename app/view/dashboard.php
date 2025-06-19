@@ -116,7 +116,7 @@ while ($row = mysqli_fetch_assoc($queryRoles)) {
                     'label' => 'Pekurban',
                     'items' => [
                         ['text' => 'Info Pembagian', 'page' => 'info_pembagian.php'],
-                        ['text' => 'Info Keuangan', 'page' => 'info_keuangan.php'],
+                        // ['text' => 'Info Keuangan', 'page' => 'info_keuangan.php'],
                         ['text' => 'QR Code', 'page' => 'qr_qurban.php?warga_id=' . $warga_id],
                     ]
                 ],
