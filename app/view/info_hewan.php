@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 include '../koneksi/koneksi.php';
 
 $query = "SELECT * FROM hewan_qurban ORDER BY created_at DESC";
@@ -163,24 +163,24 @@ $result = $koneksi->query($query);
     </thead>
     <tbody>
         <?php
-        $no = 1;
-        $total_jumlah = 0;
-        $total_berat = 0;
-        $total_biaya = 0;
+        // $no = 1;
+        // $total_jumlah = 0;
+        // $total_berat = 0;
+        // $total_biaya = 0;
 
-        while ($row = $result->fetch_assoc()) {
-            echo "<tr>";
-            echo "<td>" . $no++ . "</td>";
-            echo "<td>" . ucfirst($row['jenis']) . "</td>";
-            echo "<td>" . $row['jumlah'] . "</td>";
-            echo "<td>" . $row['total_berat'] . "</td>";
-            echo "<td>Rp " . number_format($row['biaya_total'], 2, ',', '.') . "</td>";
-            echo "<td>" . date('d-m-Y H:i', strtotime($row['created_at'])) . "</td>";
-            echo "</tr>";
-            $total_jumlah += $row['jumlah'];
-            $total_berat += $row['total_berat'];
-            $total_biaya += $row['biaya_total'];
-        }
+        // while ($row = $result->fetch_assoc()) {
+        //     echo "<tr>";
+        //     echo "<td>" . $no++ . "</td>";
+        //     echo "<td>" . ucfirst($row['jenis']) . "</td>";
+        //     echo "<td>" . $row['jumlah'] . "</td>";
+        //     echo "<td>" . $row['total_berat'] . "</td>";
+        //     echo "<td>Rp " . number_format($row['biaya_total'], 2, ',', '.') . "</td>";
+        //     echo "<td>" . date('d-m-Y H:i', strtotime($row['created_at'])) . "</td>";
+        //     echo "</tr>";
+        //     $total_jumlah += $row['jumlah'];
+        //     $total_berat += $row['total_berat'];
+        //     $total_biaya += $row['biaya_total'];
+        // }
         ?>
     </tbody>
 </table>
@@ -213,4 +213,4 @@ $result = $koneksi->query($query);
 </div>
 
 </body>
-</html>
+</html> -->

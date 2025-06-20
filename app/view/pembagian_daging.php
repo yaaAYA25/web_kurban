@@ -7,14 +7,13 @@
   <title>Pembagian Daging Qurban</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Custom Tailwind config for cyan as primary
     tailwind.config = {
       theme: {
         extend: {
           colors: {
             primary: {
-              DEFAULT: '#06b6d4', // cyan-500
-              dark: '#0891b2', // cyan-600
+              DEFAULT: '#06b6d4', 
+              dark: '#0891b2', 
             },
           },
         },

@@ -1,4 +1,4 @@
-<?php
+
 include '../koneksi/koneksi.php';
 
 if (isset($_GET['id'])) {
@@ -16,9 +16,9 @@ if (isset($_GET['id'])) {
     echo "ID tidak ditemukan.";
     exit;
 }
-?>
 
-<!DOCTYPE html>
+
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Edit Hewan Qurban</title>
@@ -46,4 +46,4 @@ if (isset($_GET['id'])) {
         <button type="submit" name="update">Update</button>
     </form>
 </body>
-</html>
+</html> -->
