@@ -17,15 +17,13 @@ ORDER BY w.nama
 ";
 
 $result = $koneksi->query($sql);
-
-// Susun data per warga
 $data_warga = [];
 
 while ($row = $result->fetch_assoc()) {
     $id = $row['warga_id'];
     $nama = $row['nama'];
-    $kategori = strtolower($row['kategori']); // warga, panitia, kurban
-    $jenis = strtolower($row['jenis']);       // sapi, kambing
+    $kategori = strtolower($row['kategori']);
+    $jenis = strtolower($row['jenis']);
     $berat = floatval($row['total_kg']);
 
     if (!isset($data_warga[$id])) {
@@ -46,58 +44,63 @@ while ($row = $result->fetch_assoc()) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8" />
-    <title>Rincian Pembagian Daging Lengkap</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }
-        table { border-collapse: collapse; width: 100%; background-color: #fff; }
-        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 14px; }
-        th { background-color: #f2f2f2; }
-        tfoot td { font-weight: bold; }
-    </style>
+    <title>Rincian Pembagian Daging Kurban</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50 font-sans text-gray-700 p-6">
 
-<h2>Rincian Pembagian Daging Kurban</h2>
+    <h2 class="text-xl font-semibold text-cyan-700 border-l-4 border-cyan-500 pl-3 mb-5">
+        📋 Rincian Pembagian Daging Kurban
+    </h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>Nama</th>
-            <th>Sapi (Warga)</th>
-            <th>Kambing (Warga)</th>
-            <th>Sapi (Panitia)</th>
-            <th>Kambing (Panitia)</th>
-            <th>Sapi (Kurban)</th>
-            <th>Kambing (Kurban)</th>
-            <th>Total (kg)</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($data_warga as $id => $data): 
-            $total = $data['warga_sapi'] + $data['warga_kambing']
-                   + $data['panitia_sapi'] + $data['panitia_kambing']
-                   + $data['kurban_sapi'] + $data['kurban_kambing'];
-        ?>
-        <tr>
-            <td><?= htmlspecialchars($data['nama']) ?></td>
-            <td><?= number_format($data['warga_sapi'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['warga_kambing'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['panitia_sapi'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['panitia_kambing'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['kurban_sapi'], 2, ',', '.') ?></td>
-            <td><?= number_format($data['kurban_kambing'], 2, ',', '.') ?></td>
-            <td><strong><?= number_format($total, 2, ',', '.') ?></strong></td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
-</table>
+    <div class="overflow-x-auto bg-white rounded-lg shadow-lg border border-cyan-200">
+        <table class="min-w-full table-auto text-sm">
+            <thead>
+                <tr class="bg-cyan-100 text-cyan-800 uppercase tracking-wide text-center">
+                    <th rowspan="2" class="py-3 px-4 border-b border-cyan-300 text-left">Nama</th>
+                    <th colspan="2" class="py-3 px-4 border-b border-cyan-300">Warga</th>
+                    <th colspan="2" class="py-3 px-4 border-b border-cyan-300">Panitia</th>
+                    <th colspan="2" class="py-3 px-4 border-b border-cyan-300">Kurban</th>
+                    <th rowspan="2" class="py-3 px-4 border-b border-cyan-300">Total (kg)</th>
+                </tr>
+                <tr class="bg-cyan-50 text-cyan-700 uppercase tracking-wide text-center">
+                    <th class="py-2 px-4 border-b border-cyan-300">Sapi</th>
+                    <th class="py-2 px-4 border-b border-cyan-300">Kambing</th>
 
-</body>
-</html>
+                    <th class="py-2 px-4 border-b border-cyan-300">Sapi</th>
+                    <th class="py-2 px-4 border-b border-cyan-300">Kambing</th>
+
+                    <th class="py-2 px-4 border-b border-cyan-300">Sapi</th>
+                    <th class="py-2 px-4 border-b border-cyan-300">Kambing</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($data_warga as $id => $data):
+                    $total = $data['warga_sapi'] + $data['warga_kambing']
+                        + $data['panitia_sapi'] + $data['panitia_kambing']
+                        + $data['kurban_sapi'] + $data['kurban_kambing'];
+                ?>
+                <tr class="border-b border-cyan-100 hover:bg-cyan-50 transition-colors text-center">
+                    <td class="py-2 px-4 font-medium text-left whitespace-nowrap"><?= htmlspecialchars($data['nama']) ?></td>
+                    <td class="py-2 px-4"><?= number_format($data['warga_sapi'], 2, ',', '.') ?> kg</td>
+                    <td class="py-2 px-4"><?= number_format($data['warga_kambing'], 2, ',', '.') ?> kg</td>
+                    <td class="py-2 px-4"><?= number_format($data['panitia_sapi'], 2, ',', '.') ?> kg</td>
+                    <td class="py-2 px-4"><?= number_format($data['panitia_kambing'], 2, ',', '.') ?> kg</td>
+                    <td class="py-2 px-4"><?= number_format($data['kurban_sapi'], 2, ',', '.') ?> kg</td>
+                    <td class="py-2 px-4"><?= number_format($data['kurban_kambing'], 2, ',', '.') ?> kg</td>
+                    <td class="py-2 px-4 font-semibold text-cyan-700"><?= number_format($total, 2, ',', '.') ?> kg</td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 
 <?php $koneksi->close(); ?>
+</body>
+</html>

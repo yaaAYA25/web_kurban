@@ -1,80 +1,72 @@
 <?php
 include '../koneksi/koneksi.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['jenis'])) {
-    $jenis = $_POST['jenis'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $jenis = isset($_POST['jenis']) ? strtolower(trim($_POST['jenis'])) : '';
+
+    // Validasi jenis hewan
+    if ($jenis !== 'sapi' && $jenis !== 'kambing') {
+        header('Location: ../halaman_utama.php?error=jenis_invalid');
+        exit;
+    }
+
+    // Tentukan hewan_id berdasarkan jenis
+    // Asumsikan: 1 = sapi, 2 = kambing
+    $hewan_id = ($jenis === 'sapi') ? 1 : 2;
+
+    // Ambil total berat dari hewan_qurban berdasarkan jenis
+    $stmt = $koneksi->prepare("SELECT SUM(total_berat) AS total_berat FROM hewan_qurban WHERE jenis = ?");
+    $stmt->bind_param("s", $jenis);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    $total_berat = $row['total_berat'] ?? 0;
+
+    if ($total_berat <= 0) {
+        header('Location: ../halaman_utama.php?error=berat_kosong');
+        exit;
+    }
+
+    // Ambil semua warga yang kategori pembagian = 'warga' (atau sesuai kebutuhan)
+    $warga_result = $koneksi->query("SELECT id_warga FROM warga"); // Contoh filter warga aktif
+
+    if ($warga_result->num_rows == 0) {
+        header('Location: ../halaman_utama.php?error=warga_kosong');
+        exit;
+    }
+
+    $jumlah_warga = $warga_result->num_rows;
+
+    // Hitung pembagian berat per warga
+    $berat_per_warga = $total_berat / $jumlah_warga;
+
     $tanggal = date('Y-m-d');
+    $created_at = date('Y-m-d H:i:s');
 
-    // Ambil semua hewan jenis itu
-    $hewan_query = mysqli_query($koneksi, "SELECT * FROM hewan_qurban WHERE jenis = '$jenis'");
-    $total_berat = 0;
-    $list_hewan_id = [];
+    // Mulai simpan pembagian daging per warga
+    $insert = $koneksi->prepare("INSERT INTO pembagian_daging (warga_id, hewan_id, kategori, jumlah_kg, tanggal, qr_code, created_at) VALUES (?, ?, ?, ?, ?, NULL, ?)");
 
-    while ($row = mysqli_fetch_assoc($hewan_query)) {
-        // Cek apakah hewan ini sudah dibagikan
-        $hewan_id = $row['id'];
-        $cek = mysqli_query($koneksi, "SELECT COUNT(*) as total FROM pembagian_daging WHERE hewan_id = $hewan_id");
-        $data_cek = mysqli_fetch_assoc($cek);
-        if ($data_cek['total'] > 0) {
-            continue; // skip hewan yang sudah dibagikan
-        }
-
-        $total_berat += $row['total_berat'];
-        $list_hewan_id[] = $hewan_id;
+    if (!$insert) {
+        die("Prepare failed: " . $koneksi->error);
     }
 
-    if (count($list_hewan_id) === 0) {
-        echo "<script>alert('Semua hewan $jenis sudah dibagikan!'); window.location.href='../view/pembagian_daging.php';</script>";
-        exit;
+    $kategori = 'warga'; // contoh kategori
+
+    // Loop semua warga dan insert
+    while ($warga = $warga_result->fetch_assoc()) {
+        $warga_id = $warga['id_warga'];
+
+        $insert->bind_param("iisdss", $warga_id, $hewan_id, $kategori, $berat_per_warga, $tanggal, $created_at);
+        $insert->execute();
     }
 
-    // Ambil semua user dengan role yang berhak
-    $roles = mysqli_query($koneksi, "
-        SELECT ur.user_id, ur.role, w.id_warga
-        FROM user_roles ur
-        JOIN users u ON ur.user_id = u.id_user
-        JOIN warga w ON u.warga_id = w.id_warga
-        WHERE ur.role IN ('warga', 'panitia', 'kurban')
-    ");
+    $insert->close();
 
-    $list_penerima = [];
-    $total_peran = 0;
+    header('Location: ../view/dashboard.php');
+    exit;
 
-    while ($row = mysqli_fetch_assoc($roles)) {
-        $id_warga = $row['id_warga'];
-        $role = $row['role'];
-
-        $total_peran++;
-        $list_penerima[] = [
-            'warga_id' => $id_warga,
-            'role' => $role,
-        ];
-    }
-
-    if ($total_peran == 0 || $total_berat == 0) {
-        echo "Data tidak lengkap atau total berat kosong.";
-        exit;
-    }
-
-    // Hitung jatah per peran
-    $jatah_peran = $total_berat / $total_peran;
-
-    // Simpan ke pembagian_daging untuk setiap penerima dan setiap hewan_id
-    foreach ($list_penerima as $penerima) {
-        foreach ($list_hewan_id as $hewan_id) {
-            $warga_id = $penerima['warga_id'];
-            $kategori = $penerima['role'];
-            $jumlah_kg = number_format($jatah_peran, 2);
-
-            mysqli_query($koneksi, "
-                INSERT INTO pembagian_daging (warga_id, hewan_id, kategori, jumlah_kg, tanggal)
-                VALUES ($warga_id, $hewan_id, '$kategori', $jumlah_kg, '$tanggal')
-            ");
-        }
-    }
-
-    echo "<script>alert('Pembagian daging jenis $jenis berhasil!'); window.location.href='../view/pembagian_daging.php';</script>";
 } else {
-    echo "Akses tidak valid!";
+    header('Location: ../view/dashboard.php');
+    exit;
 }
-?>

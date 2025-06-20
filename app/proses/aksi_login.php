@@ -18,8 +18,6 @@ if (mysqli_num_rows($query) == 1) {
         $_SESSION['id_user'] = $data['id_user'];
         $_SESSION['username'] = $data['username'];
         $_SESSION['warga_id'] = $data['warga_id'];
-
-        // Ambil semua role user
         $user_id = $data['id_user'];
         $resultRoles = $koneksi->query("SELECT role FROM user_roles WHERE user_id = $user_id");
         $roles = [];
@@ -27,11 +25,8 @@ if (mysqli_num_rows($query) == 1) {
             $roles[] = $rowRole['role'];
         }
         $_SESSION['roles'] = $roles;
-
-        // Setelah login, langsung redirect ke home.php
-        header("Location: ../view/home.php");
+        header("Location: ../view/dashboard.php");
         exit();
-
     } else {
         die("Password salah. <a href='javascript:history.back()'>Kembali</a>");
     }
